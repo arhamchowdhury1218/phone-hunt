@@ -6,6 +6,8 @@ const loadPhone = async (searchText) => {
   const data = await res.json();
   const phones = data.data;
 
+  // console.log(data)
+
   displayPhones(phones);
 };
 
@@ -30,7 +32,7 @@ const displayPhones = (phones) => {
   phones = phones.slice(0, 10);
 
   phones.forEach((phone) => {
-    console.log(phone);
+    // console.log(phone);
 
     // Step-2 --- create a div where you want to set the phones
 
@@ -44,8 +46,8 @@ const displayPhones = (phones) => {
                     <div class="card-body">
                       <h2 class="card-title">${phone.phone_name}</h2>
                       <p>If a dog chews shoes whose shoes does he choose?</p>
-                      <div class="card-actions justify-end">
-                        <button class="btn btn-primary">Buy Now</button>
+                      <div class="card-actions justify-center">
+                        <button onclick = "handleShowDetail('${phone.slug}')" class="btn btn-primary">Show details</button>
                       </div>
                     </div>
         
@@ -79,11 +81,51 @@ const toggleLoadingSpinner = (isLoading) => {
 
   if (isLoading) {
     loadingSpinner.classList.remove("hidden");
+  } else {
+    loadingSpinner.classList.add("hidden");
   }
+};
 
-  else{
+// Handle show detail function
 
-    loadingSpinner.classList.add('hidden')
-  }
+const handleShowDetail = async (id) => {
+  // console.log('clicked show detail',id)
+
+  // load single data
+
+  const res = await fetch(
+    `https://openapi.programming-hero.com/api/phone/${id}`
+  );
+
+  const data = await res.json();
+
+  // console.log(data)
+
+  const phone = data.data;
+  showPhoneDetails(phone);
+};
+
+const showPhoneDetails = (phone) => {
+  console.log(phone);
+
+  const phoneName = document.getElementById("show-detail-phone-name");
+
+  phoneName.innerText = phone.name;
+
+  const showDetailContainer = document.getElementById("show-detail-container");
+
+  showDetailContainer.innerHTML = `
+  
+  <img src="${phone.image}" alt="">
+
+  <p><span>Storage:</span>${phone.mainFeatures.storage}</p>
+  <p><span>Storage:</span>${phone.mainFeatures.displaySize}</p>
+  <p><span>Storage:</span>${phone.mainFeatures.chipSet}</p>
+  <p><span>Storage:</span>${phone.mainFeatures.memory}</p>
+  
+  
+  
+  `;
+  my_modal_3.showModal();
 };
 // loadPhone();

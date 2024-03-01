@@ -14,69 +14,81 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
-
     <header>
-
-        <h2 class="text-6xl">Hunting Phone</h2>
-
+      <h2 class="text-6xl">Hunting Phone</h2>
     </header>
 
     <main class="container mx-auto mt-8">
+      <!-- Button handler -->
+      <section>
+        <div class="mb-5 text-center p-4">
+          <input
+            id="search-field"
+            type="text"
+            placeholder="Search...."
+            class="input input-bordered w-full max-w-xs mx-3"
+          />
 
+          <button onclick="handleSearch()" class="btn btn-active btn-accent">
+            Search
+          </button>
+        </div>
+      </section>
 
-        <!-- Button handler -->
-        <section>
+      <!-- Search Result -->
 
-            <div class="mb-5 text-center p-4">
-                <input id="search-field" type="text" placeholder="Search...." class="input input-bordered w-full max-w-xs mx-3" />
+      <section>
+        <!-- Loader or spinner -->
 
-                <button onclick="handleSearch()" class="btn btn-active btn-accent">Search</button>
-            </div>
+        <div id="loading-spinner" class="text-center my-40 hidden">
+          <span class="loading loading-spinner loading-lg"></span>
+        </div>
 
-        </section>
-
-
-        
-        
         <!-- Search Result -->
 
-        <section>
+        <div
+          id="card-container"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        ></div>
 
-            <!-- Loader or spinner -->
+        <!-- Show all button -->
 
-            <div id="loading-spinner" class="text-center my-40 hidden">
-                <span class="loading loading-spinner loading-lg"></span>
-            </div>
-
-             <!-- Search Result -->
-
-            <div id="card-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-            </div>
-
-            <!-- Show all button -->
-
-            <div id="show-all-container" class="hidden text-center my-8">
-                <button class="btn btn-active btn-accent">Show All</button>
-            </div>
-
-
-        </section>
+        <div id="show-all-container" class="hidden text-center my-8">
+          <button class="btn btn-active btn-accent">Show All</button>
+        </div>
 
         
+      </section>
 
+
+      <!-- Modal -->
+
+        <!-- You can open the modal using ID.showModal() method -->
+        
+        <dialog id="my_modal_3" class="modal">
+          <div class="modal-box">
+            <form method="dialog">
+              <button
+                class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+              >
+                ✕
+              </button>
+            </form>
+            <h3 id="show-detail-phone-name" class="font-bold text-lg"></h3>
+            
+            <div id="show-detail-container">
+
+              <img src="" alt="">
+
+              <p></p>
+
+            </div>
+          </div>
+        </dialog>
     </main>
 
-
-    <footer>
-
-
-
-    </footer>
-
-
+    <footer></footer>
   </body>
-
 
   <script src="js/phone.js"></script>
 </html>
